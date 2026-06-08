@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mine Roulette: The Underworld</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="home-screen" class="screen">
+        <div class="logo-area">
+            <h1>💣 MINE ROULETTE</h1>
+            <p class="subtitle">DEAL WITH THE DEVIL</p>
+        </div>
+        
+        <div class="menu-container">
+            <button id="btn-ai" class="btn-menu">🤖 AI 대전 시작</button>
+            
+            <div class="divider"><span>OR</span></div>
+            
+            <div class="pvp-box">
+                <input type="text" id="room-input" placeholder="방 코드를 입력하세요" maxlength="6">
+                <button id="btn-pvp" class="btn-menu pvp-btn">⚔️ 플레이어 대전 입장</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen hidden">
+        <div class="game-header">
+            <div id="room-display">ROOM: <span id="current-room-id">-</span></div>
+            <div id="status">상대방의 접속을 기다리는 중...</div>
+        </div>
+
+        <div id="log-box">계약을 시작합니다. 지뢰는 실탄, 빈 칸은 공탄입니다.</div>
+        
+        <div id="scoreboard">
+            <div class="score-player">나 <span id="my-hearts">❤️❤️❤️</span></div>
+            <div class="vs">VS</div>
+            <div class="score-player">상대 <span id="opp-hearts">❤️❤️❤️</span></div>
+        </div>
+        
+        <div id="game-zone">
+            <div id="board"></div>
+        </div>
+
+        <div class="action-zone">
+            <button id="draw-btn" class="btn-action">🃏 카드 뽑기 (턴 소모)</button>
+        </div>
+
+        <h3>내 소지품 가방 (최대 5칸)</h3>
+        <div id="inventory">
+            <div class="item-slot" id="slot-0">비어있음</div>
+            <div class="item-slot" id="slot-1">비어있음</div>
+            <div class="item-slot" id="slot-2">비어있음</div>
+            <div class="item-slot" id="slot-3">비어있음</div>
+            <div class="item-slot" id="slot-4">비어있음</div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

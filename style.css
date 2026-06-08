@@ -1,0 +1,144 @@
+/* 전체 리셋 및 벅샷 룰렛 다크 감성 */
+body { 
+    background-color: #0d0d11; 
+    color: #e5c158; 
+    font-family: 'Courier New', Courier, monospace; 
+    text-align: center; 
+    margin: 0; 
+    padding: 0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 화면 전환용 클래스 */
+.screen {
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+.hidden { display: none !important; }
+
+/* 메인 홈 화면 스타일 */
+.logo-area h1 {
+    font-size: 38px;
+    color: #ff3333;
+    text-shadow: 0 0 10px rgba(255,51,51,0.5), 3px 3px 0px #000;
+    margin-bottom: 0;
+    letter-spacing: 2px;
+}
+.subtitle {
+    color: #666;
+    font-size: 14px;
+    letter-spacing: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.menu-container {
+    background: #141419;
+    border: 3px solid #3a3a42;
+    border-radius: 8px;
+    padding: 30px 20px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 25px rgba(0,0,0,0.5);
+}
+.btn-menu {
+    width: 100%;
+    background: #1c1c24;
+    color: #e5c158;
+    border: 2px solid #e5c158;
+    padding: 15px;
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 4px;
+}
+.btn-menu:hover {
+    background: #e5c158;
+    color: #000;
+    box-shadow: 0 0 15px rgba(229,193,88,0.4);
+}
+.divider {
+    margin: 20px 0;
+    position: relative;
+    color: #444;
+}
+.divider::before {
+    content: ""; position: absolute; left: 0; top: 50%; width: 100%; height: 1px; background: #333; z-index: 1;
+}
+.divider span {
+    position: relative; z-index: 2; background: #141419; padding: 0 10px; font-size: 12px;
+}
+.pvp-box input {
+    width: 100%;
+    background: #0d0d11;
+    border: 2px solid #444;
+    color: #fff;
+    padding: 12px;
+    font-size: 15px;
+    text-align: center;
+    font-family: inherit;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+.pvp-box input:focus {
+    border-color: #ff3333;
+    outline: none;
+}
+
+/* 게임 플레이 화면 스타일 */
+.game-header { margin-bottom: 15px; }
+#room-display { font-size: 12px; color: #666; margin-bottom: 5px; }
+#status { font-size: 16px; color: #fff; font-weight: bold; }
+#log-box {
+    background: #050507;
+    color: #00ff66;
+    border: 1px solid #222;
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    min-height: 34px;
+    display: flex; align-items: center; justify-content: center;
+}
+#scoreboard {
+    display: flex; justify-content: space-around; align-items: center;
+    background: #141419; border: 2px solid #2a2a32; padding: 10px; border-radius: 6px; margin-bottom: 20px;
+}
+.score-player { font-size: 16px; font-weight: bold; }
+.vs { color: #ff3333; font-style: italic; font-size: 14px; }
+
+/* 💡 지뢰판 레이아웃 */
+#game-zone { display: flex; justify-content: center; margin-bottom: 20px; }
+#board { 
+    display: grid; grid-template-columns: repeat(5, 55px); gap: 6px; 
+    background: #09090b; padding: 10px; border: 3px solid #ff3333; border-radius: 6px;
+    box-shadow: 0 0 20px rgba(255,51,51,0.15);
+}
+.cell { 
+    width: 55px; height: 55px; background: #22222b; border: 1px solid #444; 
+    font-size: 20px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; 
+    user-select: none; border-radius: 4px; transition: background 0.1s;
+}
+.cell:hover { background: #2f2f3d; border-color: #e5c158; }
+.cell.opened { background: #111116; border-color: #222; color: #fff; }
+.cell.mine { background: #ff3333; box-shadow: inset 0 0 15px #000; }
+
+/* 아이템 및 하단 인터페이스 */
+.btn-action {
+    background: #ff3333; color: #fff; border: 2px solid #fff; padding: 12px 25px;
+    font-size: 16px; font-weight: bold; font-family: inherit; cursor: pointer; border-radius: 4px; width: 100%;
+}
+.btn-action:hover { background: #fff; color: #000; }
+#inventory { display: flex; justify-content: space-between; margin-top: 10px; }
+.item-slot {
+    width: 18%; height: 90px; border: 2px dashed #444; background: #141419;
+    display: flex; align-items: center; justify-content: center; font-size: 11px; border-radius: 4px; color: #555;
+}
+.item-slot.active { border: 2px solid #e5c158; color: #e5c158; cursor: pointer; background: #222218; }
+.item-slot.active:hover { background: #3a3a28; color: #fff; }
+h3 { font-size: 14px; color: #666; margin-top: 20px; margin-bottom: 5px; text-align: left; }
