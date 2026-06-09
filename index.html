@@ -3,52 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mine Roulette: The Underworld</title>
+    <title>💥 지뢰 룰렛 (Mine Roulette) 💥</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="home-screen" class="screen">
         <div class="logo-area">
-            <h1>💣 MINE ROULETTE</h1>
-            <p class="subtitle">DEAL WITH THE DEVIL</p>
+            <h1>MINE ROULETTE</h1>
+            <div class="subtitle">DEATH CONTRACT</div>
         </div>
         
         <div class="menu-container">
-            <button id="btn-ai" class="btn-menu">🤖 AI 대전 시작</button>
+            <button id="btn-ai" class="btn-menu">🤖 악마와의 계약 (AI 싱글 매치)</button>
             
             <div class="divider"><span>OR</span></div>
             
             <div class="pvp-box">
-                <input type="text" id="room-input" placeholder="방 코드를 입력하세요" maxlength="6">
+                <input type="text" id="room-input" placeholder="방 코드를 입력하세요 (예: 7777)">
                 <button id="btn-pvp" class="btn-menu pvp-btn">⚔️ 플레이어 대전 입장</button>
             </div>
         </div>
     </div>
 
+    <div id="lobby-screen" class="screen hidden">
+        <div class="logo-area">
+            <h1 style="color: #3498db; text-shadow: 0 0 15px rgba(52,152,219,0.6);">MATCHING...</h1>
+            <div class="subtitle">WAITING FOR OPPONENT</div>
+        </div>
+        <div class="menu-container" style="border-color: #3498db; box-shadow: 0 0 25px rgba(52,152,219,0.2); text-align: center; padding: 40px 20px;">
+            <div style="font-size: 20px; color: #fff; margin-bottom: 25px;">
+                생성된 방 코드: <span id="lobby-room-id" style="color: #3498db; font-weight: bold; font-size: 28px; letter-spacing: 2px;">-</span>
+            </div>
+            <div class="loading-text" style="color: #bbb; font-size: 16px; margin-bottom: 15px; font-weight: bold;">
+                🔄 다른 플레이어가 계약에 동참하기를 기다리고 있습니다...
+            </div>
+            <p style="font-size: 13px; color: #666; line-height: 1.5;">같이 플레이할 친구에게 동일한 방 코드를 입력하고<br>입장하라고 안내해 주세요!</p>
+        </div>
+    </div>
+
     <div id="game-screen" class="screen hidden">
         <div class="game-header">
+            <div id="status">🔴 당신의 턴</div>
             <div id="room-display">ROOM: <span id="current-room-id">-</span></div>
-            <div id="status">상대방의 접속을 기다리는 중...</div>
         </div>
 
-        <div id="log-box">계약을 시작합니다. 지뢰는 실탄, 빈 칸은 공탄입니다.</div>
-        
+        <div id="log-box">시스템 가동 중...</div>
+
         <div id="scoreboard">
-            <div class="score-player">나 <span id="my-hearts">❤️❤️❤️</span></div>
+            <div class="score-player">나: <span id="my-hearts">❤️❤️❤️</span></div>
             <div class="vs">VS</div>
-            <div class="score-player">상대 <span id="opp-hearts">❤️❤️❤️</span></div>
+            <div class="score-player">상대: <span id="opp-hearts">❤️❤️❤️</span></div>
         </div>
-        
+
         <div id="game-zone">
             <div id="board"></div>
         </div>
 
-        <div class="action-zone">
-            <button id="draw-btn" class="btn-action">🃏 카드 뽑기 (턴 소모)</button>
-        </div>
-
-        <h3>내 소지품 가방 (최대 5칸)</h3>
+        <button id="draw-btn" class="btn-action">🃏 카드 뽑기 & 턴 넘기기</button>
+        
+        <h3>💼 소지품 가방 (아이템)</h3>
         <div id="inventory">
             <div class="item-slot" id="slot-0">비어있음</div>
             <div class="item-slot" id="slot-1">비어있음</div>
@@ -58,7 +72,32 @@
         </div>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="game.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, set, onValue, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // 본인 파이어베이스 콘솔창 정보를 완벽 매칭 완료!
+        const firebaseConfig = {
+            apiKey: "AIzaSyCZ4Y1sz69zHIunl8ezV1vgJ-dV3tYfyG4",
+            authDomain: "mine-roulette.firebaseapp.com",
+            databaseURL: "https://mine-roulette-default-rtdb.firebaseio.com",
+            projectId: "mine-roulette",
+            storageBucket: "mine-roulette.firebasestorage.app",
+            messagingSenderId: "799169003244",
+            appId: "1:799169003244:web:db9f41a807cb2fa07aefc9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        window.fbDB = database;
+        window.fbRefs = { ref, set, onValue, update, get };
+
+        // 라이브러리 연동 후 순차 실행 보장
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = 'game.js';
+        document.body.appendChild(script);
+    </script>
 </body>
 </html>
